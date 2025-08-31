@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homage to Albers: The White Line Study</title>
+    <!-- Tailwind CSS for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for Oswald and Barlow -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400&family=Oswald&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f4f8;
+            transition: background-color 0.5s ease;
+            font-family: 'Barlow', sans-serif;
+            font-weight: 300;
+            padding: 2vh 2vw;
+        }
+
+        /* Responsive font styles using clamp() for fluid scaling */
+        .font-oswald-clamp {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(16pt, 4vw, 24pt);
+            text-transform: uppercase;
+        }
+
+        .font-barlow-clamp {
+            font-family: 'Barlow', sans-serif;
+            font-size: clamp(12pt, 3vw, 14pt);
+            font-weight: 300;
+        }
+
+        /* The main container for the Albers squares, using flexbox for centering */
+        .squares-container {
+            position: relative;
+            /* Use a percentage of the viewport width for a responsive size */
+            width: 80vw;
+            height: 80vw;
+            max-width: 400px;
+            max-height: 400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* The three squares, nested inside one another */
+        .outer-square {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: background-color 0.5s ease;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-radius: 1rem;
+        }
+        
+        .middle-square {
+            position: absolute;
+            width: 66%;
+            height: 66%;
+            transition: background-color 0.5s ease;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+        }
+
+        /* The innermost square is centered with a thin white border */
+        .inner-square {
+            position: absolute;
+            width: 33%;
+            height: 33%;
+            transition: background-color 0.5s ease;
+            /* The key element: a thin white border that is part of the inner square */
+            border: 2px solid white;
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+            border-radius: 0.25rem;
+        }
+
+        /* Custom styles for color inputs for a better look */
+        .color-control-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .color-control-group label {
+            width: 80px;
+            flex-shrink: 0;
+        }
+        .color-control-group input[type="color"] {
+            width: 100%;
+            height: 40px;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center justify-center min-h-screen p-4 sm:p-8 text-gray-800">
+
+    <!-- Main container for the application -->
+    <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-10 max-w-2xl w-full">
+        <!-- Header -->
+        <h1 class="font-oswald-clamp text-center mb-2">Homage to Albers</h1>
+        <!-- Description -->
+        <p class="font-barlow-clamp text-center text-gray-600 mb-8">
+            This study is based on Josef Albers' series of "white line squares." Change the outer colors and observe how the thin white border between the squares appears to change hue.
+        </p>
+
+        <!-- The main interactive area with the squares and controls -->
+        <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+            <!-- Container for the squares -->
+            <div class="squares-container">
+                <div id="outer-square" class="outer-square bg-blue-700"></div>
+                <div id="middle-square" class="middle-square bg-yellow-400"></div>
+                <div id="inner-square" class="inner-square bg-red-600"></div>
+            </div>
+
+            <!-- Color controls -->
+            <div class="flex flex-col gap-4 w-full md:w-1/2">
+                <div class="color-control-group">
+                    <label>Outer:</label>
+                    <input type="color" id="outerColor" value="#1d4ed8">
+                </div>
+                <div class="color-control-group">
+                    <label>Middle:</label>
+                    <input type="color" id="middleColor" value="#facc15">
+                </div>
+                <div class="color-control-group">
+                    <label>Inner:</label>
+                    <input type="color" id="innerColor" value="#ef4444">
+                </div>
+            </div>
+        </div>
+
+        <!-- Explanation text area -->
+        <div class="mt-8 text-center space-y-4">
+            <p id="explanation-text" class="font-barlow-clamp text-gray-700">
+                Albers's work shows that a color's identity is not absolute. The white line, a constant, seems to take on the qualities of its surrounding colors.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // DOM elements
+        const outerSquare = document.getElementById('outer-square');
+        const middleSquare = document.getElementById('middle-square');
+        const innerSquare = document.getElementById('inner-square');
+
+        const outerColorInput = document.getElementById('outerColor');
+        const middleColorInput = document.getElementById('middleColor');
+        const innerColorInput = document.getElementById('innerColor');
+
+        // Function to update the colors
+        function updateColors() {
+            outerSquare.style.backgroundColor = outerColorInput.value;
+            middleSquare.style.backgroundColor = middleColorInput.value;
+            innerSquare.style.backgroundColor = innerColorInput.value;
+        }
+
+        // Add event listeners to the color inputs
+        outerColorInput.addEventListener('input', updateColors);
+        middleColorInput.addEventListener('input', updateColors);
+        innerColorInput.addEventListener('input', updateColors);
+
+        // Initial call to set the colors
+        updateColors();
+    </script>
+</body>
+</html>
