@@ -25,10 +25,11 @@
 
         .header-font {
             font-family: 'Oswald', sans-serif;
-            font-size: 32px;
+            font-size: 32pt;
             font-weight: 700;
             color: #e91d63;
-            margin: 0 0 0.5rem;
+            margin: 0 0 2.5rem;
+            text-align: center;
         }
         
         .font-barlow-clamp {
@@ -53,8 +54,8 @@
         
         .outer-square {
             position: absolute;
-            width: 100%;
-            height: 100%;
+            width: 90%; /* Adjusted size */
+            height: 90%; /* Adjusted size */
             transition: background-color 0.5s ease;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             border-radius: 1rem;
@@ -62,8 +63,8 @@
         
         .middle-square {
             position: absolute;
-            width: 66%;
-            height: 66%;
+            width: 60%; /* Adjusted size */
+            height: 60%; /* Adjusted size */
             transition: background-color 0.5s ease;
             box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.1);
             border-radius: 0.5rem;
@@ -71,8 +72,8 @@
 
         .inner-square {
             position: absolute;
-            width: 33%;
-            height: 33%;
+            width: 30%; /* Adjusted size */
+            height: 30%; /* Adjusted size */
             transition: background-color 0.5s ease;
             border: 2px solid white;
             box-sizing: border-box;
@@ -83,16 +84,18 @@
             display: flex;
             align-items: center;
             gap: 1rem;
+            flex-grow: 1;
         }
         .color-control-group label {
             width: 80px;
             flex-shrink: 0;
+            text-align: right;
         }
         .color-control-group input[type="color"] {
-            width: 100%;
-            height: 40px;
+            width: 40px; /* Adjusted size */
+            height: 40px; /* Adjusted size */
             border: none;
-            border-radius: 0.25rem;
+            border-radius: 50%; /* Make them circular */
             cursor: pointer;
         }
 
@@ -127,13 +130,34 @@
             align-items: center;
             gap: 2rem;
         }
+
+        /* Styles for the ad copy container */
+        .description-container {
+            background-color: #f0f0f0;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            max-width: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .description-text p {
+            font-family: 'Barlow', sans-serif;
+            font-size: clamp(14pt, 3.5vw, 16pt);
+            line-height: 1.6;
+            color: #333;
+            text-align: center;
+            margin: 0;
+        }
     </style>
 </head>
 
 <body>
 
     <div class="container-wrapper">
-        <h1 class="header-font">Homage to Albers</h1>
+        <h1 class="header-font">Homage to Albers: The White Line Study</h1>
         <p class="font-barlow-clamp text-center text-gray-600">
             This study is based on Josef Albers' series of "white line squares." Change the outer colors and observe how the thin white border between the squares appears to change hue.
         </p>
@@ -145,29 +169,35 @@
                 <div id="inner-square" class="inner-square" style="background-color: #ef4444;"></div>
             </div>
 
-            <div class="flex flex-col gap-4 w-full md:w-1/2">
-                <div class="color-control-group">
-                    <label>Outer:</label>
-                    <input type="color" id="outerColor" value="#1d4ed8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between w-full md:w-1/2">
+                <div class="flex flex-col gap-4">
+                    <div class="color-control-group">
+                        <label>Outer:</label>
+                        <input type="color" id="outerColor" value="#1d4ed8">
+                    </div>
+                    <div class="color-control-group">
+                        <label>Middle:</label>
+                        <input type="color" id="middleColor" value="#facc15">
+                    </div>
+                    <div class="color-control-group">
+                        <label>Inner:</label>
+                        <input type="color" id="innerColor" value="#ef4444">
+                    </div>
                 </div>
-                <div class="color-control-group">
-                    <label>Middle:</label>
-                    <input type="color" id="middleColor" value="#facc15">
-                </div>
-                <div class="color-control-group">
-                    <label>Inner:</label>
-                    <input type="color" id="innerColor" value="#ef4444">
+                
+                <div class="flex flex-grow justify-center items-center mt-8 md:mt-0">
+                    <div class="description-container">
+                        <div class="description-text">
+                            <p>
+                                Albers's work shows that a color's identity is not absolute. The white line, a constant, seems to take on the qualities of its surrounding colors.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="mt-4 text-center space-y-4">
-            <p id="explanation-text" class="font-barlow-clamp text-gray-700">
-                Albers's work shows that a color's identity is not absolute. The white line, a constant, seems to take on the qualities of its surrounding colors.
-            </p>
-        </div>
-
-        <a href="https://www.jennifermora.com/portfolio" target="_blank" class="w-full max-w-sm">
+        <a href="https://www.jennifermora.com/portfolio" target="_blank" class="w-full max-w-sm mt-8">
             <button class="button-primary w-full">Return to Portfolio</button>
         </a>
     </div>
