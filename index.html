@@ -4,12 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homage to Albers: The White Line Study</title>
-    <!-- Tailwind CSS for modern styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts for Oswald and Barlow -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400&family=Oswald&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #f0f4f8;
@@ -17,15 +15,18 @@
             font-family: 'Barlow', sans-serif;
             font-weight: 300;
             padding: 2vh 2vw;
+            color: #333;
+        }
+
+        /* Updated header styles to match request */
+        .header-font {
+            font-family: Arial, sans-serif;
+            font-size: 32px;
+            font-weight: bold;
+            color: #e91d63;
         }
 
         /* Responsive font styles using clamp() for fluid scaling */
-        .font-oswald-clamp {
-            font-family: 'Oswald', sans-serif;
-            font-size: clamp(16pt, 4vw, 24pt);
-            text-transform: uppercase;
-        }
-
         .font-barlow-clamp {
             font-family: 'Barlow', sans-serif;
             font-size: clamp(12pt, 3vw, 14pt);
@@ -94,30 +95,40 @@
             border-radius: 0.25rem;
             cursor: pointer;
         }
+
+        /* Button styling */
+        .button-primary {
+            background-color: #E91D63;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-family: 'Barlow', sans-serif;
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+        .button-primary:hover {
+            background-color: #d11a5a;
+        }
     </style>
 </head>
 
-<body class="flex flex-col items-center justify-center min-h-screen p-4 sm:p-8 text-gray-800">
+<body class="flex flex-col items-center justify-center min-h-screen p-4 sm:p-8">
 
-    <!-- Main container for the application -->
     <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-10 max-w-2xl w-full">
-        <!-- Header -->
-        <h1 class="font-oswald-clamp text-center mb-2">Homage to Albers</h1>
-        <!-- Description -->
+        <h1 class="header-font text-center mb-2">Homage to Albers</h1>
         <p class="font-barlow-clamp text-center text-gray-600 mb-8">
             This study is based on Josef Albers' series of "white line squares." Change the outer colors and observe how the thin white border between the squares appears to change hue.
         </p>
 
-        <!-- The main interactive area with the squares and controls -->
         <div class="flex flex-col md:flex-row items-center justify-center gap-8">
-            <!-- Container for the squares -->
             <div class="squares-container">
                 <div id="outer-square" class="outer-square bg-blue-700"></div>
                 <div id="middle-square" class="middle-square bg-yellow-400"></div>
                 <div id="inner-square" class="inner-square bg-red-600"></div>
             </div>
 
-            <!-- Color controls -->
             <div class="flex flex-col gap-4 w-full md:w-1/2">
                 <div class="color-control-group">
                     <label>Outer:</label>
@@ -134,12 +145,17 @@
             </div>
         </div>
 
-        <!-- Explanation text area -->
         <div class="mt-8 text-center space-y-4">
             <p id="explanation-text" class="font-barlow-clamp text-gray-700">
                 Albers's work shows that a color's identity is not absolute. The white line, a constant, seems to take on the qualities of its surrounding colors.
             </p>
         </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="https://www.jennifermora.com/portfolio" target="_blank">
+            <button class="button-primary">Return to Portfolio</button>
+        </a>
     </div>
 
     <script>
