@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #f0f4f8;
@@ -16,27 +16,32 @@
             font-weight: 300;
             padding: 2vh 2vw;
             color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
         }
 
-        /* Updated header styles to match request */
         .header-font {
-            font-family: Arial, sans-serif;
+            font-family: 'Oswald', sans-serif; /* Changed to Oswald */
             font-size: 32px;
-            font-weight: bold;
+            font-weight: 700;
             color: #e91d63;
+            margin: 0 0 0.5rem; /* Reduced margin */
         }
-
-        /* Responsive font styles using clamp() for fluid scaling */
+        
         .font-barlow-clamp {
             font-family: 'Barlow', sans-serif;
             font-size: clamp(12pt, 3vw, 14pt);
             font-weight: 300;
+            line-height: 1.6;
+            margin: 0 auto 1rem; /* Adjusted margin */
+            max-width: 600px;
         }
 
-        /* The main container for the Albers squares, using flexbox for centering */
         .squares-container {
             position: relative;
-            /* Use a percentage of the viewport width for a responsive size */
             width: 80vw;
             height: 80vw;
             max-width: 400px;
@@ -47,7 +52,6 @@
             align-items: center;
         }
         
-        /* The three squares, nested inside one another */
         .outer-square {
             position: absolute;
             width: 100%;
@@ -66,19 +70,16 @@
             border-radius: 0.5rem;
         }
 
-        /* The innermost square is centered with a thin white border */
         .inner-square {
             position: absolute;
             width: 33%;
             height: 33%;
             transition: background-color 0.5s ease;
-            /* The key element: a thin white border that is part of the inner square */
             border: 2px solid white;
-            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+            box-sizing: border-box;
             border-radius: 0.25rem;
         }
 
-        /* Custom styles for color inputs for a better look */
         .color-control-group {
             display: flex;
             align-items: center;
@@ -96,37 +97,53 @@
             cursor: pointer;
         }
 
-        /* Button styling */
         .button-primary {
             background-color: #E91D63;
             color: white;
             padding: 0.75rem 1.5rem;
             border-radius: 0.5rem;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.1s ease;
             font-family: 'Barlow', sans-serif;
             font-weight: 400;
             text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(233, 29, 99, 0.3);
         }
         .button-primary:hover {
             background-color: #d11a5a;
         }
+        .button-primary:active {
+            transform: scale(0.98);
+        }
+        
+        .container-wrapper {
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            max-width: 1000px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
     </style>
 </head>
 
-<body class="flex flex-col items-center justify-center min-h-screen p-4 sm:p-8">
+<body>
 
-    <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-10 max-w-2xl w-full">
-        <h1 class="header-font text-center mb-2">Homage to Albers</h1>
-        <p class="font-barlow-clamp text-center text-gray-600 mb-8">
+    <div class="container-wrapper">
+        <h1 class="header-font">Homage to Albers</h1>
+        <p class="font-barlow-clamp text-center text-gray-600">
             This study is based on Josef Albers' series of "white line squares." Change the outer colors and observe how the thin white border between the squares appears to change hue.
         </p>
 
-        <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+        <div class="flex flex-col md:flex-row items-center justify-center gap-8 w-full">
             <div class="squares-container">
-                <div id="outer-square" class="outer-square bg-blue-700"></div>
-                <div id="middle-square" class="middle-square bg-yellow-400"></div>
-                <div id="inner-square" class="inner-square bg-red-600"></div>
+                <div id="outer-square" class="outer-square" style="background-color: #1d4ed8;"></div>
+                <div id="middle-square" class="middle-square" style="background-color: #facc15;"></div>
+                <div id="inner-square" class="inner-square" style="background-color: #ef4444;"></div>
             </div>
 
             <div class="flex flex-col gap-4 w-full md:w-1/2">
@@ -145,7 +162,7 @@
             </div>
         </div>
 
-        <div class="mt-8 text-center space-y-4">
+        <div class="mt-4 text-center space-y-4">
             <p id="explanation-text" class="font-barlow-clamp text-gray-700">
                 Albers's work shows that a color's identity is not absolute. The white line, a constant, seems to take on the qualities of its surrounding colors.
             </p>
